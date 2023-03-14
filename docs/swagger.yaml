@@ -1,0 +1,746 @@
+definitions:
+  config.CoreConfig:
+    properties:
+      name:
+        type: string
+    type: object
+  config.OutboundConfig:
+    properties:
+      config:
+        additionalProperties: true
+        type: object
+      enabled:
+        type: boolean
+      name:
+        type: string
+    type: object
+  data.Error:
+    properties:
+      message:
+        type: string
+    type: object
+  escalation.Escalation:
+    properties:
+      description:
+        type: string
+      id:
+        type: integer
+      layers:
+        items:
+          $ref: '#/definitions/escalation.Layer'
+        type: array
+      name:
+        type: string
+    type: object
+  escalation.Layer:
+    properties:
+      responder_reference:
+        type: string
+      responder_type:
+        type: string
+      tier:
+        type: integer
+    type: object
+  github_com_klaxn_klaxn-api_internal_config.Config:
+    properties:
+      app:
+        $ref: '#/definitions/config.CoreConfig'
+      aws:
+        additionalProperties:
+          type: string
+        type: object
+      outboundConfig:
+        items:
+          $ref: '#/definitions/config.OutboundConfig'
+        type: array
+    type: object
+  github_com_klaxn_klaxn-api_pkg_model_user.User:
+    properties:
+      contact_methods:
+        items:
+          $ref: '#/definitions/user.ContactMethod'
+        type: array
+      email:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: integer
+      last_name:
+        type: string
+      user_type:
+        type: string
+    type: object
+  routes.GrafanaAlert:
+    properties:
+      annotations: {}
+      dashboardURL:
+        type: string
+      endsAt:
+        type: string
+      fingerprint:
+        type: string
+      generatorURL:
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        type: object
+      panelURL:
+        type: string
+      silenceURL:
+        type: string
+      startsAt:
+        type: string
+      status:
+        type: string
+      valueString:
+        type: string
+    type: object
+  routes.GrafanaBody:
+    properties:
+      alerts:
+        items:
+          $ref: '#/definitions/routes.GrafanaAlert'
+        type: array
+      commonAnnotations:
+        type: object
+      commonLabels:
+        properties:
+          alertname:
+            type: string
+          grafana_folder:
+            type: string
+          klaxn:
+            type: string
+        type: object
+      externalURL:
+        type: string
+      groupKey:
+        type: string
+      groupLabels:
+        properties:
+          alertname:
+            type: string
+          grafana_folder:
+            type: string
+        type: object
+      message:
+        type: string
+      orgId:
+        type: integer
+      receiver:
+        type: string
+      state:
+        type: string
+      status:
+        type: string
+      title:
+        type: string
+      truncatedAlerts:
+        type: integer
+      version:
+        type: string
+    type: object
+  service.Service:
+    properties:
+      description:
+        type: string
+      escalation_id:
+        type: integer
+      id:
+        type: integer
+      link:
+        type: string
+      name:
+        type: string
+      team_id:
+        type: integer
+    type: object
+  team.Team:
+    properties:
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  user.ContactMethod:
+    properties:
+      address:
+        type: string
+      id:
+        type: integer
+      summary:
+        type: string
+      type:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /alerts/grafana:
+    post:
+      consumes:
+      - application/json
+      description: Send a Grafana alert
+      parameters:
+      - description: aolert
+        in: body
+        name: alert
+        required: true
+        schema:
+          $ref: '#/definitions/routes.GrafanaBody'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/data.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Send a Grafana alert
+      tags:
+      - alerts
+  /debug/config:
+    get:
+      description: Get currently running config
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_klaxn_klaxn-api_internal_config.Config'
+      summary: Get currently running config
+      tags:
+      - debug
+  /escalations:
+    get:
+      consumes:
+      - application/json
+      description: Get all escalations
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/escalation.Escalation'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Get all escalations
+      tags:
+      - escalations
+    post:
+      consumes:
+      - application/json
+      description: Create an escalation
+      parameters:
+      - description: escalation
+        in: body
+        name: escalation
+        required: true
+        schema:
+          $ref: '#/definitions/escalation.Escalation'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/escalation.Escalation'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/data.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Create an escalation
+      tags:
+      - escalations
+  /escalations/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an existing escalation
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/data.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Delete an existing escalation
+      tags:
+      - escalations
+    get:
+      consumes:
+      - application/json
+      description: Get an escalation
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/escalation.Escalation'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/data.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Get an escalation
+      tags:
+      - escalations
+    put:
+      consumes:
+      - application/json
+      description: Create an existing escalation
+      parameters:
+      - description: escalation
+        in: body
+        name: escalation
+        required: true
+        schema:
+          $ref: '#/definitions/escalation.Escalation'
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/escalation.Escalation'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/data.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Update an existing escalation
+      tags:
+      - escalations
+  /services:
+    get:
+      consumes:
+      - application/json
+      description: Get all services
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/service.Service'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Get all services
+      tags:
+      - services
+    post:
+      consumes:
+      - application/json
+      description: Create a service
+      parameters:
+      - description: service
+        in: body
+        name: service
+        required: true
+        schema:
+          $ref: '#/definitions/service.Service'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/service.Service'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/data.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Create a service
+      tags:
+      - services
+  /services/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a service
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/data.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Delete a service
+      tags:
+      - services
+    get:
+      consumes:
+      - application/json
+      description: Get a service
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/service.Service'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/data.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Get a service
+      tags:
+      - services
+    put:
+      consumes:
+      - application/json
+      description: Update a team
+      parameters:
+      - description: team
+        in: body
+        name: team
+        required: true
+        schema:
+          $ref: '#/definitions/team.Team'
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/team.Team'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/data.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Update a team
+      tags:
+      - teams
+  /teams:
+    get:
+      consumes:
+      - application/json
+      description: Get all teams
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/team.Team'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Get all teams
+      tags:
+      - teams
+    post:
+      consumes:
+      - application/json
+      description: Create a team
+      parameters:
+      - description: team
+        in: body
+        name: team
+        required: true
+        schema:
+          $ref: '#/definitions/team.Team'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/team.Team'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/data.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Create a team
+      tags:
+      - teams
+  /teams/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a team
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/data.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Delete a team
+      tags:
+      - teams
+    get:
+      consumes:
+      - application/json
+      description: Get a team
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/team.Team'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/data.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Get a team
+      tags:
+      - teams
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: Get all users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/github_com_klaxn_klaxn-api_pkg_model_user.User'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Get all users
+      tags:
+      - users
+    post:
+      consumes:
+      - application/json
+      description: Create a user
+      parameters:
+      - description: user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_klaxn_klaxn-api_pkg_model_user.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_klaxn_klaxn-api_pkg_model_user.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/data.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Create a user
+      tags:
+      - users
+  /users/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an existing user
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/data.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Delete an existing user
+      tags:
+      - users
+    get:
+      consumes:
+      - application/json
+      description: Get a user
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_klaxn_klaxn-api_pkg_model_user.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/data.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Get a user
+      tags:
+      - users
+    put:
+      consumes:
+      - application/json
+      description: Create an existing user
+      parameters:
+      - description: user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_klaxn_klaxn-api_pkg_model_user.User'
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_klaxn_klaxn-api_pkg_model_user.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/data.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data.Error'
+      summary: Update an existing user
+      tags:
+      - users
+swagger: "2.0"
