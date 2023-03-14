@@ -32,7 +32,7 @@ func CreateOutbounds(conf []*config.OutboundConfig, logger *logrus.Logger) []Sen
 
 func createOutbound(name string, config map[string]interface{}, logger *logrus.Logger) (Sender, error) {
 	if name == "twilio" {
-		return NewTwilio(logger), nil
+		return NewTwilio(logger, config)
 	}
 
 	if name == "alert_logger" {

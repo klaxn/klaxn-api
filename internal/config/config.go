@@ -2,6 +2,7 @@ package config
 
 import (
 	"context"
+	"fmt"
 	"io/ioutil"
 	"os"
 
@@ -99,4 +100,11 @@ func (c *Config) GetAWSConfig() (aws.Config, error) {
 		o.Region = "eu-west-1"
 		return nil
 	})
+}
+
+func GetStringFromConfigMap(in map[string]interface{}, key string) (string, error) {
+	if in[key].(string) == "" {
+		return "", fmt.Errorf("could not find config for '%s'", key)
+	}
+	return in[key].(string), nil
 }
