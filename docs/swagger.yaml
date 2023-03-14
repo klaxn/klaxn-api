@@ -4,6 +4,19 @@ definitions:
       name:
         type: string
     type: object
+  config.DatabaseConfig:
+    properties:
+      databaseName:
+        type: string
+      hostname:
+        type: string
+      password:
+        type: string
+      port:
+        type: string
+      user:
+        type: string
+    type: object
   config.OutboundConfig:
     properties:
       config:
@@ -12,6 +25,29 @@ definitions:
       enabled:
         type: boolean
       name:
+        type: string
+    type: object
+  data.Alert:
+    properties:
+      description:
+        type: string
+      ends_at:
+        type: string
+      id:
+        type: integer
+      labels:
+        type: object
+      service_id:
+        type: integer
+      starts_at:
+        type: string
+      status:
+        type: string
+      title:
+        type: string
+      uniq_id:
+        type: string
+      url_more_info:
         type: string
     type: object
   data.Error:
@@ -49,6 +85,8 @@ definitions:
         additionalProperties:
           type: string
         type: object
+      databaseConfig:
+        $ref: '#/definitions/config.DatabaseConfig'
       outboundConfig:
         items:
           $ref: '#/definitions/config.OutboundConfig'
@@ -73,7 +111,10 @@ definitions:
     type: object
   routes.GrafanaAlert:
     properties:
-      annotations: {}
+      annotations:
+        additionalProperties:
+          type: string
+        type: object
       dashboardURL:
         type: string
       endsAt:
@@ -96,6 +137,9 @@ definitions:
         type: string
       valueString:
         type: string
+      values:
+        additionalProperties: true
+        type: object
     type: object
   routes.GrafanaBody:
     properties:
@@ -104,26 +148,20 @@ definitions:
           $ref: '#/definitions/routes.GrafanaAlert'
         type: array
       commonAnnotations:
+        additionalProperties:
+          type: string
         type: object
       commonLabels:
-        properties:
-          alertname:
-            type: string
-          grafana_folder:
-            type: string
-          klaxn:
-            type: string
+        additionalProperties:
+          type: string
         type: object
       externalURL:
         type: string
       groupKey:
         type: string
       groupLabels:
-        properties:
-          alertname:
-            type: string
-          grafana_folder:
-            type: string
+        additionalProperties:
+          type: string
         type: object
       message:
         type: string
