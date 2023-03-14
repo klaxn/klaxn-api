@@ -877,6 +877,26 @@ const docTemplate = `{
                 }
             }
         },
+        "config.DatabaseConfig": {
+            "type": "object",
+            "properties": {
+                "databaseName": {
+                    "type": "string"
+                },
+                "hostname": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "port": {
+                    "type": "string"
+                },
+                "user": {
+                    "type": "string"
+                }
+            }
+        },
         "config.OutboundConfig": {
             "type": "object",
             "properties": {
@@ -888,6 +908,41 @@ const docTemplate = `{
                     "type": "boolean"
                 },
                 "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "data.Alert": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "ends_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "labels": {
+                    "type": "object"
+                },
+                "service_id": {
+                    "type": "integer"
+                },
+                "starts_at": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "uniq_id": {
+                    "type": "string"
+                },
+                "url_more_info": {
                     "type": "string"
                 }
             }
@@ -946,6 +1001,9 @@ const docTemplate = `{
                         "type": "string"
                     }
                 },
+                "databaseConfig": {
+                    "$ref": "#/definitions/config.DatabaseConfig"
+                },
                 "outboundConfig": {
                     "type": "array",
                     "items": {
@@ -983,7 +1041,12 @@ const docTemplate = `{
         "routes.GrafanaAlert": {
             "type": "object",
             "properties": {
-                "annotations": {},
+                "annotations": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
                 "dashboardURL": {
                     "type": "string"
                 },
@@ -1016,6 +1079,10 @@ const docTemplate = `{
                 },
                 "valueString": {
                     "type": "string"
+                },
+                "values": {
+                    "type": "object",
+                    "additionalProperties": true
                 }
             }
         },
@@ -1029,20 +1096,15 @@ const docTemplate = `{
                     }
                 },
                 "commonAnnotations": {
-                    "type": "object"
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
                 },
                 "commonLabels": {
                     "type": "object",
-                    "properties": {
-                        "alertname": {
-                            "type": "string"
-                        },
-                        "grafana_folder": {
-                            "type": "string"
-                        },
-                        "klaxn": {
-                            "type": "string"
-                        }
+                    "additionalProperties": {
+                        "type": "string"
                     }
                 },
                 "externalURL": {
@@ -1053,13 +1115,8 @@ const docTemplate = `{
                 },
                 "groupLabels": {
                     "type": "object",
-                    "properties": {
-                        "alertname": {
-                            "type": "string"
-                        },
-                        "grafana_folder": {
-                            "type": "string"
-                        }
+                    "additionalProperties": {
+                        "type": "string"
                     }
                 },
                 "message": {
