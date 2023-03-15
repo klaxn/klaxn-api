@@ -54,7 +54,7 @@ jobs:
           POSTGRES_USER: klaxn
           POSTGRES_PASSWORD: klaxn
       klaxn-api:
-        image: ${{ env.TEST_TAG }}
+        image: petetanton/klaxn-api:test
         env:
           DB_HOSTNAME: postgres
           DB_USER: postgres
