@@ -39,24 +39,33 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-#          load: true
-          push: true
+          load: true
+#          push: true
           tags: ${{ env.TEST_TAG }}
 #      - name: Test
 #        run: |
 #          docker run --rm ${{ env.TEST_TAG }}
-#  integration-test:
-#    runs-on: ubuntu-latest
-#    services:
-#      postgres:
-#        image: postgres:15-alpine
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v3
-#      - name: Set up Go
-#        uses: actions/setup-go@v2
-#        with:
-#          go-version: 1.19
-#      - name: Run tests
-#        run: |
-#          TF_ACC=true go test -v ./...
+  integration-test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: klaxn
+          POSTGRES_PASSWORD: klaxn
+      klaxn-api:
+        image: ${{ env.TEST_TAG }}
+        env:
+          DB_HOSTNAME: postgres
+          DB_USER: postgres
+          DB_PASSWORD: postgres
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.19
+      - name: Run tests
+        run: |
+          TF_ACC=true KLAXN_URL=http://klaxn-api:8080 go test -v ./...

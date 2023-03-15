@@ -12,7 +12,7 @@ func setup(t *testing.T) *client.Client {
 		t.SkipNow()
 	}
 
-	c, err := client.New("http://localhost:8080")
+	c, err := client.New(getEnvOrDefault("KLAXN_URL", "http://localhost:8080"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -42,4 +42,12 @@ func setup(t *testing.T) *client.Client {
 	}
 
 	return c
+}
+
+func getEnvOrDefault(key, def string) string {
+	if value := os.Getenv(key); value != "" {
+		return value
+	}
+
+	return def
 }
