@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.17.3
 	github.com/aws/aws-sdk-go-v2/config v1.17.6
 	github.com/gin-gonic/gin v1.8.1
-	github.com/go-playground/assert/v2 v2.0.1
+	github.com/go-playground/assert/v2 v2.2.0
 	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.9.0
 	github.com/swaggo/files v1.0.0
