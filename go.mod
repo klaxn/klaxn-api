@@ -9,7 +9,7 @@ require (
 	github.com/go-playground/assert/v2 v2.0.1
 	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.9.0
-	github.com/swaggo/files v1.0.0
+	github.com/swaggo/files v1.0.1
 	github.com/swaggo/gin-swagger v1.5.3
 	github.com/swaggo/swag v1.8.12
 	github.com/twilio/twilio-go v0.26.0
