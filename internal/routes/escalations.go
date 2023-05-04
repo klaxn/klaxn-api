@@ -10,18 +10,19 @@ import (
 	"github.com/klaxn/klaxn-api/pkg/model/escalation"
 )
 
-// @BasePath /api/v1
+//	@BasePath	/api/v1
 
 // GetEscalations godoc
-// @Summary Get all escalations
-// @Schemes
-// @Description Get all escalations
-// @Tags escalations
-// @Accept json
-// @Produce json
-// @Success 200 {array} escalation.Escalation
-// @Failure 500 {object} data.Error
-// @Router /escalations [get]
+//
+//	@Summary	Get all escalations
+//	@Schemes
+//	@Description	Get all escalations
+//	@Tags			escalations
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{array}		escalation.Escalation
+//	@Failure		500	{object}	data.Error
+//	@Router			/escalations [get]
 func (r *Router) GetEscalations(c *gin.Context) {
 	_, span := r.tracer.Start(c, "GetEscalations")
 	defer span.End()
@@ -42,16 +43,17 @@ func (r *Router) GetEscalations(c *gin.Context) {
 }
 
 // GetEscalation godoc
-// @Summary Get an escalation
-// @Description Get an escalation
-// @Tags escalations
-// @Accept json
-// @Produce json
-// @Success 200 {object} escalation.Escalation
-// @Failure 400 {object} data.Error
-// @Failure 500 {object} data.Error
-// @Router /escalations/{id} [get]
-// @Param id path int true "id"
+//
+//	@Summary		Get an escalation
+//	@Description	Get an escalation
+//	@Tags			escalations
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{object}	escalation.Escalation
+//	@Failure		400	{object}	data.Error
+//	@Failure		500	{object}	data.Error
+//	@Router			/escalations/{id} [get]
+//	@Param			id	path	int	true	"id"
 func (r *Router) GetEscalation(c *gin.Context) {
 	_, span := r.tracer.Start(c, "GetEscalation")
 	defer span.End()
@@ -78,16 +80,17 @@ func (r *Router) GetEscalation(c *gin.Context) {
 }
 
 // CreateEscalation godoc
-// @Summary Create an escalation
-// @Description Create an escalation
-// @Tags escalations
-// @Accept json
-// @Produce json
-// @Success 200 {object} escalation.Escalation
-// @Failure 400 {object} data.Error
-// @Failure 500 {object} data.Error
-// @Router /escalations [post]
-// @Param escalation body escalation.Escalation true "escalation"
+//
+//	@Summary		Create an escalation
+//	@Description	Create an escalation
+//	@Tags			escalations
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{object}	escalation.Escalation
+//	@Failure		400	{object}	data.Error
+//	@Failure		500	{object}	data.Error
+//	@Router			/escalations [post]
+//	@Param			escalation	body	escalation.Escalation	true	"escalation"
 func (r *Router) CreateEscalation(c *gin.Context) {
 	_, span := r.tracer.Start(c, "CreateEscalation")
 	defer span.End()
@@ -126,17 +129,18 @@ func (r *Router) CreateEscalation(c *gin.Context) {
 }
 
 // UpdateEscalation godoc
-// @Summary Update an existing escalation
-// @Description Create an existing escalation
-// @Tags escalations
-// @Accept json
-// @Produce json
-// @Success 200 {object} escalation.Escalation
-// @Failure 400 {object} data.Error
-// @Failure 500 {object} data.Error
-// @Router /escalations/{id} [put]
-// @Param escalation body escalation.Escalation true "escalation"
-// @Param id path int true "id"
+//
+//	@Summary		Update an existing escalation
+//	@Description	Create an existing escalation
+//	@Tags			escalations
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{object}	escalation.Escalation
+//	@Failure		400	{object}	data.Error
+//	@Failure		500	{object}	data.Error
+//	@Router			/escalations/{id} [put]
+//	@Param			escalation	body	escalation.Escalation	true	"escalation"
+//	@Param			id			path	int						true	"id"
 func (r *Router) UpdateEscalation(c *gin.Context) {
 	_, span := r.tracer.Start(c, "UpdateEscalation")
 	defer span.End()
@@ -175,16 +179,17 @@ func (r *Router) UpdateEscalation(c *gin.Context) {
 }
 
 // DeleteEscalation godoc
-// @Summary Delete an existing escalation
-// @Description Delete an existing escalation
-// @Tags escalations
-// @Accept json
-// @Produce json
-// @Success 204
-// @Failure 400 {object} data.Error
-// @Failure 500 {object} data.Error
-// @Router /escalations/{id} [delete]
-// @Param id path int true "id"
+//
+//	@Summary		Delete an existing escalation
+//	@Description	Delete an existing escalation
+//	@Tags			escalations
+//	@Accept			json
+//	@Produce		json
+//	@Success		204
+//	@Failure		400	{object}	data.Error
+//	@Failure		500	{object}	data.Error
+//	@Router			/escalations/{id} [delete]
+//	@Param			id	path	int	true	"id"
 func (r *Router) DeleteEscalation(c *gin.Context) {
 	_, span := r.tracer.Start(c, "DeleteEscalation")
 	defer span.End()

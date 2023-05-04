@@ -11,15 +11,16 @@ import (
 )
 
 // GetUsers godoc
-// @Summary Get all users
-// @Schemes
-// @Description Get all users
-// @Tags users
-// @Accept json
-// @Produce json
-// @Success 200 {array} user.User
-// @Failure 500 {object} data.Error
-// @Router /users [get]
+//
+//	@Summary	Get all users
+//	@Schemes
+//	@Description	Get all users
+//	@Tags			users
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{array}		user.User
+//	@Failure		500	{object}	data.Error
+//	@Router			/users [get]
 func (r *Router) GetUsers(c *gin.Context) {
 	_, span := r.tracer.Start(c, "GetUsers")
 	defer span.End()
@@ -34,16 +35,17 @@ func (r *Router) GetUsers(c *gin.Context) {
 }
 
 // GetUser godoc
-// @Summary Get a user
-// @Description Get a user
-// @Tags users
-// @Accept json
-// @Produce json
-// @Success 200 {object} user.User
-// @Failure 400 {object} data.Error
-// @Failure 500 {object} data.Error
-// @Router /users/{id} [get]
-// @Param id path int true "id"
+//
+//	@Summary		Get a user
+//	@Description	Get a user
+//	@Tags			users
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{object}	user.User
+//	@Failure		400	{object}	data.Error
+//	@Failure		500	{object}	data.Error
+//	@Router			/users/{id} [get]
+//	@Param			id	path	int	true	"id"
 func (r *Router) GetUser(c *gin.Context) {
 	_, span := r.tracer.Start(c, "GetUser")
 	defer span.End()
@@ -64,16 +66,17 @@ func (r *Router) GetUser(c *gin.Context) {
 }
 
 // CreateUser godoc
-// @Summary Create a user
-// @Description Create a user
-// @Tags users
-// @Accept json
-// @Produce json
-// @Success 200 {object} user.User
-// @Failure 400 {object} data.Error
-// @Failure 500 {object} data.Error
-// @Router /users [post]
-// @Param user body user.User true "user"
+//
+//	@Summary		Create a user
+//	@Description	Create a user
+//	@Tags			users
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{object}	user.User
+//	@Failure		400	{object}	data.Error
+//	@Failure		500	{object}	data.Error
+//	@Router			/users [post]
+//	@Param			user	body	user.User	true	"user"
 func (r *Router) CreateUser(c *gin.Context) {
 	_, span := r.tracer.Start(c, "CreateUser")
 	defer span.End()
@@ -102,17 +105,18 @@ func (r *Router) CreateUser(c *gin.Context) {
 }
 
 // UpdateUser godoc
-// @Summary Update an existing user
-// @Description Create an existing user
-// @Tags users
-// @Accept json
-// @Produce json
-// @Success 200 {object} user.User
-// @Failure 400 {object} data.Error
-// @Failure 500 {object} data.Error
-// @Router /users/{id} [put]
-// @Param user body user.User true "user"
-// @Param id path int true "id"
+//
+//	@Summary		Update an existing user
+//	@Description	Create an existing user
+//	@Tags			users
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{object}	user.User
+//	@Failure		400	{object}	data.Error
+//	@Failure		500	{object}	data.Error
+//	@Router			/users/{id} [put]
+//	@Param			user	body	user.User	true	"user"
+//	@Param			id		path	int			true	"id"
 func (r *Router) UpdateUser(c *gin.Context) {
 	_, span := r.tracer.Start(c, "UpdateUser")
 	defer span.End()
@@ -149,16 +153,17 @@ func (r *Router) UpdateUser(c *gin.Context) {
 }
 
 // DeleteUser godoc
-// @Summary Delete an existing user
-// @Description Delete an existing user
-// @Tags users
-// @Accept json
-// @Produce json
-// @Success 204
-// @Failure 400 {object} data.Error
-// @Failure 500 {object} data.Error
-// @Router /users/{id} [delete]
-// @Param id path int true "id"
+//
+//	@Summary		Delete an existing user
+//	@Description	Delete an existing user
+//	@Tags			users
+//	@Accept			json
+//	@Produce		json
+//	@Success		204
+//	@Failure		400	{object}	data.Error
+//	@Failure		500	{object}	data.Error
+//	@Router			/users/{id} [delete]
+//	@Param			id	path	int	true	"id"
 func (r *Router) DeleteUser(c *gin.Context) {
 	_, span := r.tracer.Start(c, "DeleteUser")
 	defer span.End()

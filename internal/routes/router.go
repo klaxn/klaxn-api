@@ -143,13 +143,14 @@ func (r *Router) SendNullResponse(c *gin.Context, status int, span trace.Span) {
 }
 
 // GetConfig godoc
-// @Summary Get currently running config
-// @Schemes
-// @Description Get currently running config
-// @Tags debug
-// @Produce json
-// @Success 200 {object} config.Config
-// @Router /debug/config [get]
+//
+//	@Summary	Get currently running config
+//	@Schemes
+//	@Description	Get currently running config
+//	@Tags			debug
+//	@Produce		json
+//	@Success		200	{object}	config.Config
+//	@Router			/debug/config [get]
 func (r *Router) GetConfig(c *gin.Context) {
 	_, span := r.tracer.Start(c, "GetConfig")
 	defer span.End()

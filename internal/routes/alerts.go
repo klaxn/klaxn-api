@@ -44,16 +44,17 @@ type GrafanaBody struct {
 }
 
 // GrafanaInbound godoc
-// @Summary Send a Grafana alert
-// @Description Send a Grafana alert
-// @Tags alerts
-// @Accept json
-// @Produce json
-// @Success 204
-// @Failure 400 {object} data.Error
-// @Failure 500 {object} data.Error
-// @Router /alerts/grafana [post]
-// @Param alert body GrafanaBody true "aolert"
+//
+//	@Summary		Send a Grafana alert
+//	@Description	Send a Grafana alert
+//	@Tags			alerts
+//	@Accept			json
+//	@Produce		json
+//	@Success		204
+//	@Failure		400	{object}	data.Error
+//	@Failure		500	{object}	data.Error
+//	@Router			/alerts/grafana [post]
+//	@Param			alert	body	GrafanaBody	true	"aolert"
 func (r *Router) GrafanaInbound(c *gin.Context) {
 	_, span := r.tracer.Start(c, "GrafanaInbound")
 	defer span.End()
@@ -137,14 +138,15 @@ func (r *Router) GrafanaInbound(c *gin.Context) {
 }
 
 // GetAlerts godoc
-// @Summary Get all alerts
-// @Description Get all alerts
-// @Tags alerts
-// @Accept json
-// @Produce json
-// @Success 200 {array} data.Alert
-// @Failure 500 {object} data.Error
-// @Router /services [get]
+//
+//	@Summary		Get all alerts
+//	@Description	Get all alerts
+//	@Tags			alerts
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{array}		data.Alert
+//	@Failure		500	{object}	data.Error
+//	@Router			/services [get]
 func (r *Router) GetAlerts(c *gin.Context) {
 	// TODO: do a proper abstraction
 	_, span := r.tracer.Start(c, "GetServices")

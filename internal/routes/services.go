@@ -11,14 +11,15 @@ import (
 )
 
 // GetServices godoc
-// @Summary Get all services
-// @Description Get all services
-// @Tags services
-// @Accept json
-// @Produce json
-// @Success 200 {array} service.Service
-// @Failure 500 {object} data.Error
-// @Router /services [get]
+//
+//	@Summary		Get all services
+//	@Description	Get all services
+//	@Tags			services
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{array}		service.Service
+//	@Failure		500	{object}	data.Error
+//	@Router			/services [get]
 func (r *Router) GetServices(c *gin.Context) {
 	_, span := r.tracer.Start(c, "GetServices")
 	defer span.End()
@@ -33,16 +34,17 @@ func (r *Router) GetServices(c *gin.Context) {
 }
 
 // GetService godoc
-// @Summary Get a service
-// @Description Get a service
-// @Tags services
-// @Accept json
-// @Produce json
-// @Success 200 {object} service.Service
-// @Failure 400 {object} data.Error
-// @Failure 500 {object} data.Error
-// @Router /services/{id} [get]
-// @Param id path int true "id"
+//
+//	@Summary		Get a service
+//	@Description	Get a service
+//	@Tags			services
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{object}	service.Service
+//	@Failure		400	{object}	data.Error
+//	@Failure		500	{object}	data.Error
+//	@Router			/services/{id} [get]
+//	@Param			id	path	int	true	"id"
 func (r *Router) GetService(c *gin.Context) {
 	_, span := r.tracer.Start(c, "GetService")
 	defer span.End()
@@ -63,16 +65,17 @@ func (r *Router) GetService(c *gin.Context) {
 }
 
 // CreateService godoc
-// @Summary Create a service
-// @Description Create a service
-// @Tags services
-// @Accept json
-// @Produce json
-// @Success 200 {object} service.Service
-// @Failure 400 {object} data.Error
-// @Failure 500 {object} data.Error
-// @Router /services [post]
-// @Param service body service.Service true "service"
+//
+//	@Summary		Create a service
+//	@Description	Create a service
+//	@Tags			services
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{object}	service.Service
+//	@Failure		400	{object}	data.Error
+//	@Failure		500	{object}	data.Error
+//	@Router			/services [post]
+//	@Param			service	body	service.Service	true	"service"
 func (r *Router) CreateService(c *gin.Context) {
 	_, span := r.tracer.Start(c, "CreateService")
 	defer span.End()
@@ -99,17 +102,18 @@ func (r *Router) CreateService(c *gin.Context) {
 }
 
 // UpdateService godoc
-// @Summary Update a service
-// @Description Update a service
-// @Tags services
-// @Accept json
-// @Produce json
-// @Success 200 {object} service.Service
-// @Failure 400 {object} data.Error
-// @Failure 500 {object} data.Error
-// @Router /services/{id} [put]
-// @Param service body service.Service true "service"
-// @Param id path int true "id"
+//
+//	@Summary		Update a service
+//	@Description	Update a service
+//	@Tags			services
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{object}	service.Service
+//	@Failure		400	{object}	data.Error
+//	@Failure		500	{object}	data.Error
+//	@Router			/services/{id} [put]
+//	@Param			service	body	service.Service	true	"service"
+//	@Param			id		path	int				true	"id"
 func (r *Router) UpdateService(c *gin.Context) {
 	_, span := r.tracer.Start(c, "UpdateService")
 	defer span.End()
@@ -151,16 +155,17 @@ func (r *Router) UpdateService(c *gin.Context) {
 }
 
 // DeleteService godoc
-// @Summary Delete a service
-// @Description Delete a service
-// @Tags services
-// @Accept json
-// @Produce json
-// @Success 204
-// @Failure 400 {object} data.Error
-// @Failure 500 {object} data.Error
-// @Router /services/{id} [delete]
-// @Param id path int true "id"
+//
+//	@Summary		Delete a service
+//	@Description	Delete a service
+//	@Tags			services
+//	@Accept			json
+//	@Produce		json
+//	@Success		204
+//	@Failure		400	{object}	data.Error
+//	@Failure		500	{object}	data.Error
+//	@Router			/services/{id} [delete]
+//	@Param			id	path	int	true	"id"
 func (r *Router) DeleteService(c *gin.Context) {
 	_, span := r.tracer.Start(c, "DeleteService")
 	defer span.End()

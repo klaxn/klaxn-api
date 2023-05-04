@@ -11,14 +11,15 @@ import (
 )
 
 // GetTeams godoc
-// @Summary Get all teams
-// @Description Get all teams
-// @Tags teams
-// @Accept json
-// @Produce json
-// @Success 200 {array} team.Team
-// @Failure 500 {object} data.Error
-// @Router /teams [get]
+//
+//	@Summary		Get all teams
+//	@Description	Get all teams
+//	@Tags			teams
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{array}		team.Team
+//	@Failure		500	{object}	data.Error
+//	@Router			/teams [get]
 func (r *Router) GetTeams(c *gin.Context) {
 	_, span := r.tracer.Start(c, "GetTeams")
 	defer span.End()
@@ -32,16 +33,17 @@ func (r *Router) GetTeams(c *gin.Context) {
 }
 
 // GetTeam godoc
-// @Summary Get a team
-// @Description Get a team
-// @Tags teams
-// @Accept json
-// @Produce json
-// @Success 200 {object} team.Team
-// @Failure 400 {object} data.Error
-// @Failure 500 {object} data.Error
-// @Router /teams/{id} [get]
-// @Param id path int true "id"
+//
+//	@Summary		Get a team
+//	@Description	Get a team
+//	@Tags			teams
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{object}	team.Team
+//	@Failure		400	{object}	data.Error
+//	@Failure		500	{object}	data.Error
+//	@Router			/teams/{id} [get]
+//	@Param			id	path	int	true	"id"
 func (r *Router) GetTeam(c *gin.Context) {
 	_, span := r.tracer.Start(c, "GetTeam")
 	defer span.End()
@@ -61,16 +63,17 @@ func (r *Router) GetTeam(c *gin.Context) {
 }
 
 // CreateTeam godoc
-// @Summary Create a team
-// @Description Create a team
-// @Tags teams
-// @Accept json
-// @Produce json
-// @Success 200 {object} team.Team
-// @Failure 400 {object} data.Error
-// @Failure 500 {object} data.Error
-// @Router /teams [post]
-// @Param team body team.Team true "team"
+//
+//	@Summary		Create a team
+//	@Description	Create a team
+//	@Tags			teams
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{object}	team.Team
+//	@Failure		400	{object}	data.Error
+//	@Failure		500	{object}	data.Error
+//	@Router			/teams [post]
+//	@Param			team	body	team.Team	true	"team"
 func (r *Router) CreateTeam(c *gin.Context) {
 	_, span := r.tracer.Start(c, "CreateTeam")
 	defer span.End()
@@ -98,18 +101,19 @@ func (r *Router) CreateTeam(c *gin.Context) {
 }
 
 // UpdateTeam godoc
-// @Summary Update a team
-// @Description Update a team
-// @Tags teams
-// @Accept json
-// @Produce json
-// @Success 200 {object} team.Team
-// @Failure 400 {object} data.Error
-// @Failure 500 {object} data.Error
-// @Failure 500 {object} data.Error
-// @Router /services/{id} [put]
-// @Param team body team.Team true "team"
-// @Param id path int true "id"
+//
+//	@Summary		Update a team
+//	@Description	Update a team
+//	@Tags			teams
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{object}	team.Team
+//	@Failure		400	{object}	data.Error
+//	@Failure		500	{object}	data.Error
+//	@Failure		500	{object}	data.Error
+//	@Router			/services/{id} [put]
+//	@Param			team	body	team.Team	true	"team"
+//	@Param			id		path	int			true	"id"
 func (r *Router) UpdateTeam(c *gin.Context) {
 	_, span := r.tracer.Start(c, "UpdateTeam")
 	defer span.End()
@@ -145,16 +149,17 @@ func (r *Router) UpdateTeam(c *gin.Context) {
 }
 
 // DeleteTeam godoc
-// @Summary Delete a team
-// @Description Delete a team
-// @Tags teams
-// @Accept json
-// @Produce json
-// @Success 204
-// @Failure 400 {object} data.Error
-// @Failure 500 {object} data.Error
-// @Router /teams/{id} [delete]
-// @Param id path int true "id"
+//
+//	@Summary		Delete a team
+//	@Description	Delete a team
+//	@Tags			teams
+//	@Accept			json
+//	@Produce		json
+//	@Success		204
+//	@Failure		400	{object}	data.Error
+//	@Failure		500	{object}	data.Error
+//	@Router			/teams/{id} [delete]
+//	@Param			id	path	int	true	"id"
 func (r *Router) DeleteTeam(c *gin.Context) {
 	_, span := r.tracer.Start(c, "DeleteTeam")
 	defer span.End()
