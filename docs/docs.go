@@ -73,7 +73,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/config.Config"
+                            "$ref": "#/definitions/github_com_klaxn_klaxn-api_internal_config.Config"
                         }
                     }
                 }
@@ -677,7 +677,7 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/user.User"
+                                "$ref": "#/definitions/github_com_klaxn_klaxn-api_pkg_model_user.User"
                             }
                         }
                     },
@@ -708,7 +708,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/user.User"
+                            "$ref": "#/definitions/github_com_klaxn_klaxn-api_pkg_model_user.User"
                         }
                     }
                 ],
@@ -716,7 +716,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/user.User"
+                            "$ref": "#/definitions/github_com_klaxn_klaxn-api_pkg_model_user.User"
                         }
                     },
                     "400": {
@@ -760,7 +760,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/user.User"
+                            "$ref": "#/definitions/github_com_klaxn_klaxn-api_pkg_model_user.User"
                         }
                     },
                     "400": {
@@ -796,7 +796,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/user.User"
+                            "$ref": "#/definitions/github_com_klaxn_klaxn-api_pkg_model_user.User"
                         }
                     },
                     {
@@ -811,7 +811,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/user.User"
+                            "$ref": "#/definitions/github_com_klaxn_klaxn-api_pkg_model_user.User"
                         }
                     },
                     "400": {
@@ -870,29 +870,6 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "config.Config": {
-            "type": "object",
-            "properties": {
-                "app": {
-                    "$ref": "#/definitions/config.CoreConfig"
-                },
-                "aws": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "databaseConfig": {
-                    "$ref": "#/definitions/config.DatabaseConfig"
-                },
-                "outboundConfig": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/config.OutboundConfig"
-                    }
-                }
-            }
-        },
         "config.CoreConfig": {
             "type": "object",
             "properties": {
@@ -1010,6 +987,55 @@ const docTemplate = `{
                 },
                 "tier": {
                     "type": "integer"
+                }
+            }
+        },
+        "github_com_klaxn_klaxn-api_internal_config.Config": {
+            "type": "object",
+            "properties": {
+                "app": {
+                    "$ref": "#/definitions/config.CoreConfig"
+                },
+                "aws": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "databaseConfig": {
+                    "$ref": "#/definitions/config.DatabaseConfig"
+                },
+                "outboundConfig": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/config.OutboundConfig"
+                    }
+                }
+            }
+        },
+        "github_com_klaxn_klaxn-api_pkg_model_user.User": {
+            "type": "object",
+            "properties": {
+                "contact_methods": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/user.ContactMethod"
+                    }
+                },
+                "email": {
+                    "type": "string"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "user_type": {
+                    "type": "string"
                 }
             }
         },
@@ -1173,32 +1199,6 @@ const docTemplate = `{
                     "type": "string"
                 }
             }
-        },
-        "user.User": {
-            "type": "object",
-            "properties": {
-                "contact_methods": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/user.ContactMethod"
-                    }
-                },
-                "email": {
-                    "type": "string"
-                },
-                "first_name": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "last_name": {
-                    "type": "string"
-                },
-                "user_type": {
-                    "type": "string"
-                }
-            }
         }
     }
 }`
@@ -1213,6 +1213,8 @@ var SwaggerInfo = &swag.Spec{
 	Description:      "",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
+	LeftDelim:        "{{",
+	RightDelim:       "}}",
 }
 
 func init() {
