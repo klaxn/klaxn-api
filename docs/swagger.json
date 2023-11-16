@@ -61,7 +61,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_klaxn_klaxn-api_internal_config.Config"
+                            "$ref": "#/definitions/config.Config"
                         }
                     }
                 }
@@ -665,7 +665,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/github_com_klaxn_klaxn-api_pkg_model_user.User"
+                                "$ref": "#/definitions/user.User"
                             }
                         }
                     },
@@ -696,7 +696,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_klaxn_klaxn-api_pkg_model_user.User"
+                            "$ref": "#/definitions/user.User"
                         }
                     }
                 ],
@@ -704,7 +704,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_klaxn_klaxn-api_pkg_model_user.User"
+                            "$ref": "#/definitions/user.User"
                         }
                     },
                     "400": {
@@ -748,7 +748,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_klaxn_klaxn-api_pkg_model_user.User"
+                            "$ref": "#/definitions/user.User"
                         }
                     },
                     "400": {
@@ -784,7 +784,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_klaxn_klaxn-api_pkg_model_user.User"
+                            "$ref": "#/definitions/user.User"
                         }
                     },
                     {
@@ -799,7 +799,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_klaxn_klaxn-api_pkg_model_user.User"
+                            "$ref": "#/definitions/user.User"
                         }
                     },
                     "400": {
@@ -858,6 +858,29 @@
         }
     },
     "definitions": {
+        "config.Config": {
+            "type": "object",
+            "properties": {
+                "app": {
+                    "$ref": "#/definitions/config.CoreConfig"
+                },
+                "aws": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "databaseConfig": {
+                    "$ref": "#/definitions/config.DatabaseConfig"
+                },
+                "outboundConfig": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/config.OutboundConfig"
+                    }
+                }
+            }
+        },
         "config.CoreConfig": {
             "type": "object",
             "properties": {
@@ -975,55 +998,6 @@
                 },
                 "tier": {
                     "type": "integer"
-                }
-            }
-        },
-        "github_com_klaxn_klaxn-api_internal_config.Config": {
-            "type": "object",
-            "properties": {
-                "app": {
-                    "$ref": "#/definitions/config.CoreConfig"
-                },
-                "aws": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "databaseConfig": {
-                    "$ref": "#/definitions/config.DatabaseConfig"
-                },
-                "outboundConfig": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/config.OutboundConfig"
-                    }
-                }
-            }
-        },
-        "github_com_klaxn_klaxn-api_pkg_model_user.User": {
-            "type": "object",
-            "properties": {
-                "contact_methods": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/user.ContactMethod"
-                    }
-                },
-                "email": {
-                    "type": "string"
-                },
-                "first_name": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "last_name": {
-                    "type": "string"
-                },
-                "user_type": {
-                    "type": "string"
                 }
             }
         },
@@ -1184,6 +1158,32 @@
                     "type": "string"
                 },
                 "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "user.User": {
+            "type": "object",
+            "properties": {
+                "contact_methods": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/user.ContactMethod"
+                    }
+                },
+                "email": {
+                    "type": "string"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "user_type": {
                     "type": "string"
                 }
             }

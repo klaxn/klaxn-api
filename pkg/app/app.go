@@ -33,6 +33,7 @@ func New() (*App, error) {
 		return nil, err
 	}
 	logger := logrus.New()
+	logger.SetLevel(logrus.DebugLevel)
 
 	return &App{Logger: logger, manager: manager, ob: outbound.CreateOutbounds(conf.OutboundConfig, logger), conf: conf}, nil
 }
