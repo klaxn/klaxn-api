@@ -4,20 +4,13 @@ import (
 	"context"
 	"log"
 	"net/http"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/codes"
-	"go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetricgrpc"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
-	metric2 "go.opentelemetry.io/otel/metric"
-	"go.opentelemetry.io/otel/metric/global"
-	"go.opentelemetry.io/otel/sdk/metric"
-	"go.opentelemetry.io/otel/sdk/metric/metricdata"
-	"go.opentelemetry.io/otel/sdk/metric/view"
 	"go.opentelemetry.io/otel/sdk/resource"
 	tracesdk "go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.10.0"
@@ -32,7 +25,6 @@ type Router struct {
 	db     *data.Manager
 	logger logrus.FieldLogger
 	tracer trace.Tracer
-	meter  metric2.Meter
 	ob     []outbound.Sender
 	cfg    *config.Config
 }
@@ -46,7 +38,6 @@ func New(db *data.Manager, ob []outbound.Sender, logger logrus.FieldLogger, cfg 
 	ctx := context.Background()
 
 	initTracerProvider(ctx, res)
-	initMeterProvider(ctx, res)
 
 	//responseTimeInstrument, err := meter.SyncInt64().Histogram("http.server.duration")
 	//if err != nil {
@@ -57,7 +48,6 @@ func New(db *data.Manager, ob []outbound.Sender, logger logrus.FieldLogger, cfg 
 		db:     db,
 		logger: logger,
 		tracer: otel.GetTracerProvider().Tracer("my-tracer"),
-		meter:  global.Meter("my-meter"),
 		ob:     ob,
 		cfg:    cfg,
 	}
@@ -74,32 +64,6 @@ func initTracerProvider(ctx context.Context, res *resource.Resource) {
 		tracesdk.WithResource(res),
 	)
 	otel.SetTracerProvider(tracerProvider)
-}
-
-func initMeterProvider(ctx context.Context, res *resource.Resource) {
-	exporter, err := otlpmetricgrpc.New(ctx)
-	if err != nil {
-		log.Fatalf("%s: %v", "failed to create metric exporter", err)
-	}
-
-	reader := metric.NewPeriodicReader(
-		exporter,
-		metric.WithTemporalitySelector(NewRelicTemporalitySelector),
-		metric.WithInterval(2*time.Second),
-	)
-
-	meterProvider := metric.NewMeterProvider(
-		metric.WithResource(res),
-		metric.WithReader(reader),
-	)
-	global.SetMeterProvider(meterProvider)
-}
-
-func NewRelicTemporalitySelector(kind view.InstrumentKind) metricdata.Temporality {
-	if kind == view.SyncUpDownCounter || kind == view.AsyncUpDownCounter {
-		return metricdata.CumulativeTemporality
-	}
-	return metricdata.DeltaTemporality
 }
 
 // Deprecated: Please use `SendErr` instead
