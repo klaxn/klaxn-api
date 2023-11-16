@@ -44,5 +44,5 @@ jobs:
             darwin/amd64
             darwin/arm64
           tags: |
-            petetanton/klaxn-api:${{ GITHUB_REF }}
+            petetanton/klaxn-api:${{ github.ref_name }}
             petetanton/klaxn-api:latest
