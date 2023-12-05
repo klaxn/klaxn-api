@@ -1,5 +1,5 @@
 FROM alpine:3.17 as final
-FROM golang:1.20.3-alpine3.17 as build
+FROM golang:1.21.5-alpine3.17 as build
 
 WORKDIR src/
 COPY go.* .
