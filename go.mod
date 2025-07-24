@@ -12,7 +12,7 @@ require (
 	github.com/swaggo/files v1.0.1
 	github.com/swaggo/gin-swagger v1.6.0
 	github.com/swaggo/swag v1.8.12
-	github.com/twilio/twilio-go v0.26.0
+	github.com/twilio/twilio-go v1.27.0
 	go.opentelemetry.io/otel v1.20.0
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc v1.20.0
 	go.opentelemetry.io/otel/sdk v1.20.0
@@ -51,6 +51,7 @@ require (
 	github.com/go-playground/validator/v10 v10.14.0 // indirect
 	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
+	github.com/golang-jwt/jwt/v5 v5.2.2 // indirect
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.16.0 // indirect
