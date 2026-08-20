@@ -12,7 +12,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
-          go-version: 1.19
+          go-version: 1.27
       - name: generate swagger docs
         run: |
           go mod tidy
@@ -69,7 +69,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
-          go-version: 1.19
+          go-version: 1.27
       - name: Run tests
         run: |
           TF_ACC=true KLAXN_URL=http://klaxn-api:8080 go test -v ./...
